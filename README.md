@@ -1,16 +1,9 @@
-<h1>atmega32_hal</h1>
+<h1>atmega32_MCaL</h1>
 
 
+This Project aims to build a full Microcontroller layer for atmega32 microcontroller
 
-<h5>main.c</h5></br>
-<p>test and apply</p></br>
+I will upload code weekly and will write a tutorial explaining the code in step by step guid in my blog page
 
-<h3>include/</h3></br>
-<p>all header files</p></br>
 
-<h3>src/</h3></br>
-<p>source code</p></br>
-
-<h3>Makefile</h3></br>
-
-<p>build target and flash</p></br>
+Contact me if you want to contribute of follow me along while coding
