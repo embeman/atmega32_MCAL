@@ -1,9 +1,7 @@
-<h1>atmega32_MCaL</h1>
-
-
+# atmega32_MCaL
+## _Objective_ 
 This Project aims to build a full Microcontroller layer for atmega32 microcontroller
 
-I will upload code weekly and will write a tutorial explaining the code in step by step guid in my blog page
+I am uploading code weekly and will write a tutorial explaining the code in step by step guid in my personal [blog page](https://embeddedman.blogspot.com/)
 
-
-Contact me if you want to contribute of follow me along while coding
+This is an Active Project and work under progress contact me if you want to contribute or follow me along while coding
