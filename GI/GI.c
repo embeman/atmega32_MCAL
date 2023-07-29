@@ -1,7 +1,7 @@
 #include <GI/GI.h>
-#include <GI/GI_Reg.h>
 #include <Bit_Math.h>
 
+#include <atmega32_REG.h>
 
 void GI_Enable(){
 	SET_BIT(SREG , 7);

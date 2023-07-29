@@ -1,6 +1,6 @@
 #include <Dio.h>
 #include <Bit_Math.h>
-
+#include <atmega32_REG.h>
 
 void DIO_Init_Channel(Pin_Channel pin ,Pin_Channel_Direction dir){
 	switch(pin/8){

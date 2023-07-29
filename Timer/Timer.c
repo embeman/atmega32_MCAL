@@ -1,7 +1,8 @@
 #include <TIMER/Timer.h>
 #include <TIMER/Timer_Cfg.h>
-#include <TIMER/Timer_Reg.h>
 #include <avr/interrupt.h>
+
+#include <atmega32_REG.h>
 
 Timer_Interrupt_P2F _timer0_ovf_isr;
 Timer_Interrupt_P2F _timer0_ocr_isr;
