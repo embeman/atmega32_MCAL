@@ -1,10 +1,10 @@
-FILES = main.o Dio_Cfg.o Dio.o
-INCLUDE = ./Dio/include/ utils/
+FILES = main.o Dio_Cfg.o Dio.o Exti.o GI.o Timer.o
+INCLUDE = -IEXTI/ -IGI/ -ITimer/ -IDio/ -Iutils/ 
 MCU = atmega32
 
 all:
 
-test_target:
+test_connection_target:
 	avrdude -p m32 -c usbasp
 
 flash: main.hex
@@ -17,16 +17,23 @@ main.hex: $(FILES)
 	
 # main file
 main.o: main.c
-	avr-gcc -c $^ -o $@ -mmcu=$(MCU) -O0 -IDio/include/ -Iutils/
+	avr-gcc -c $^ -o $@ -mmcu=$(MCU) -O0 $(INCLUDE)
 
 # DIO file
 Dio.o: Dio/src/Dio.c
-	avr-gcc -c $^ -o $@ -mmcu=$(MCU) -O0 -IDio/include/ -Iutils/
+	avr-gcc -c $^ -o $@ -mmcu=$(MCU) -O0 $(INCLUDE)
 
 Dio_Cfg.o: Dio/src/Dio_Cfg.c
 	avr-gcc -c $^ -o $@ -mmcu=$(MCU) -O0 -IDio/include/ -Iutils/
-
-
+#EXTI 
+Exti.o: Exti/Exti.c
+	avr-gcc -c $^ -o $@ -mmcu=$(MCU) -O0 $(INCLUDE)
+# GI 
+GI.o: GI/GI.c
+	avr-gcc -c $^ -o $@ -mmcu=$(MCU) -O0 $(INCLUDE)
+# Timer
+Timer.o: Timer/Timer.c
+	avr-gcc -c $^ -o $@ -mmcu=$(MCU) -O0 $(INCLUDE)
 
 .Phony: clean
 
