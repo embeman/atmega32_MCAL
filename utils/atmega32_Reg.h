@@ -1,9 +1,34 @@
-#ifndef _ATMEGA32_REG_H
-#define _ATMEGA32_REG_H
+#ifndef UTILS_ATMEGA32_REG_H_
+#define UTILS_ATMEGA32_REG_H_
 
 #include <Std_Types.h>
 
-// Dio Module
+// TWI
+#define	_TWDR (*(volatile uint8*)(0x23))
+#define	_TWAR (*(volatile uint8*)(0x22))
+#define	_TWSR (*(volatile uint8*)(0x21))
+#define	_TWBR (*(volatile uint8*)(0x20))
+#define	_TWCR (*(volatile uint8*)(0x56))
+
+
+
+// SPI
+
+#define	_SPCR (*(volatile uint8*)(0x2D))
+#define	_SPSR (*(volatile uint8*)(0x2E))
+#define	_SPDR (*(volatile uint8*)(0x2F))
+
+// UART
+
+#define _UBRRH (*(volatile uint8*)(0x40))
+#define _UBRRL (*(volatile uint8*)(0x29))
+
+#define _UCSRA (*(volatile uint8*)(0x2B))
+#define _UCSRB (*(volatile uint8*)(0x2A))
+#define _UCSRC (*(volatile uint8*)(0x40))
+#define _UDR (*(volatile uint8*)(0x2C))
+
+// DIO
 
 #define _PORTA (*(volatile uint8*)(0x3B))
 #define _DDRA (*(volatile uint8*)(0x3A))
@@ -21,9 +46,7 @@
 #define _DDRD (*(volatile uint8*)(0x31))
 #define _PIND (*(volatile const uint8*)(0x30))
 
-
-// External Interrupt
-
+// EXTI
 #define _MCUCR	(*(volatile uint8*)(0x55))
 #define _MCUCSR (*(volatile uint8*)(0x54))
 #define _GICR	(*(volatile uint8*)(0x5B))
@@ -32,10 +55,11 @@
 #define _DDRD (*(volatile uint8*)(0x31))
 #define _DDRB (*(volatile uint8*)(0x37))
 
+// GI
+#define _SREG (*(volatile uint8*)(0x5F))
 
-// Global Interrupt
-
-#define SREG (*(volatile uint8*)(0x5F))
+// WDT
+#define _WDTCR (*(volatile uint8* )(0x41))
 
 // TIMER 0
 #define _TCCR0	*(volatile uint8*)(0x53)
@@ -63,11 +87,8 @@
 
 // TIMER 2
 #define _TCCR2	*(volatile uint8*)(0x45)
-#define _TCNR2	*(volatile uint8*)(0x44)
+#define _TCNT2	*(volatile uint8*)(0x44)
 #define _OCR2	*(volatile uint8*)(0x43)
 
 
-
-
-
-#endif
+#endif /* UTILS_ATMEGA32_REG_H_ */

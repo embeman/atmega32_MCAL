@@ -1,7 +1,7 @@
-#include <EXTI/Exti.h>
-#include <EXTI/Exti_Types.h>
+#include <Exti.h>
+#include <Exti_Types.h>
 
-#include <atmega32_REG.h>
+#include <atmega32_Reg.h>
 #include <Bit_Math.h>
 
 Exti_ISR isrs[3];
