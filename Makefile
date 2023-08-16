@@ -2,6 +2,9 @@
 PROJ_DIR := $(realpath $(CURDIR))
 PROJ_NAME = myApp
 
+PROJ_SRC =  $(addprefix APP/,$(addsuffix  .c,$(PROJ_NAME)))
+PROJ_OBJ = $(patsubst %.c,%.o,$(PROJ_SRC))
+
 CC = avr-gcc
 LD = avr-ld
 OBJCOPY = avr-objcopy
@@ -40,11 +43,11 @@ CFLAGS := -mmcu=$(MCU) -Wall -Os -DF_CPU=$(F_CPU) $(INCLUDE)
 all:$(TARGET) $(HEX_FILE)
 
 
-$(TARGET): main.o $(OBJECTS)
+$(TARGET): $(PROJ_OBJ) $(OBJECTS)
 	@echo "Linking $@"
 	$(LD) $^ -o $@
 
-main.o: main.c
+$(PROJ_OBJ): $(PROJ_SRC)
 	@echo "Building $<"
 	@$(CC) -c $< -o $@ $(CFLAGS)
 
@@ -70,7 +73,7 @@ test_connection:
 
 
 clean:
-	@rm main.o
+	@rm $(PROJ_OBJ)
 	@rm $(OBJECTS)
 	@rm $(TARGET)
 	@rm $(HEX_FILE)
