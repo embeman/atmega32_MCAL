@@ -11,7 +11,7 @@ TARGET = $(addsuffix .elf, $(PROJ_NAME))
 HEX_FILE = $(patsubst %.elf,%.hex,$(TARGET))
 BUILDDIR := Build
 
-DIRS =		MCAL/_WDT 		\
+DIRS =		MCAL/WDT 		\
 			MCAL/ADC 		\
 			MCAL/DIO 		\
 			MCAL/EXTI 		\
@@ -19,19 +19,22 @@ DIRS =		MCAL/_WDT 		\
 			MCAL/SPI		\
 			MCAL/TIMER	 	\
 			MCAL/TWI 		\
-			MCAL/UART 		
+			MCAL/UART 		\
+			HAL/LCD			\
+			HAL/Keypad
 
 SOURCES := $(foreach i , $(DIRS) , $(wildcard $(i)/*.c))
 OBJECTS := $(foreach i, $(SOURCES), $(patsubst %.c,%.o,$(i)))
 MKDIR := $(foreach i , $(DIRS) , $(addprefix $(BUILDDIR)/, $(i)))
 
-IPATH = utils/ MCAL/ADC MCAL/DIO MCAL/EXTI MCAL/GI MCAL/SPI MCAL/TIMER MCAL/TWI MCAL/UART MCAL/WDT /usr/lib/avr/include
+IPATH = utils MCAL/ADC MCAL/DIO MCAL/EXTI MCAL/GI MCAL/SPI MCAL/TIMER MCAL/TWI MCAL/UART MCAL/WDT HAL/LCD HAL/Keypad 
 
 INCLUDE = $(foreach dir, $(IPATH), $(addprefix -I, $(dir)))
 
 MCU = atmega32
+F_CPU = 1000000UL
 
-CFLAGS := -std=c99 -mmcu=$(MCU) $(INCLUDE)
+CFLAGS := -mmcu=$(MCU) -Wall -Os -DF_CPU=$(F_CPU) $(INCLUDE)
 
 
 all:$(TARGET) $(HEX_FILE)
@@ -39,13 +42,13 @@ all:$(TARGET) $(HEX_FILE)
 
 $(TARGET): main.o $(OBJECTS)
 	@echo "Linking $@"
-	@$(LD) $^ -o $@
+	$(LD) $^ -o $@
 
 main.o: main.c
 	@echo "Building $<"
 	@$(CC) -c $< -o $@ $(CFLAGS)
 
-$(HEX_FILE):
+$(HEX_FILE): $(TARGET)
 	@echo "Creating Hex File $(HEX_FILE)"
 	@$(OBJCOPY) -j .text -j .data -O ihex $(TARGET) $@
 
@@ -58,7 +61,7 @@ $(OBJECTS):%.o:%.c
 ########################################################################
 
 
-flash:$(HEX_FILE)
+flash: $(HEX_FILE)
 	avrdude -p m32 -c usbasp -U flash:w:$<
 
 
@@ -67,10 +70,11 @@ test_connection:
 
 
 clean:
+	@rm main.o
 	@rm $(OBJECTS)
 	@rm $(TARGET)
 	@rm $(HEX_FILE)
-	@rm main.o
+	
 
 
 # Used in Debuging Makefile By printing variables names

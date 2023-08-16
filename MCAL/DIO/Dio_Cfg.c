@@ -10,6 +10,6 @@ Pin_Config_t Pin_Configs[]={
 void Dio_Init(){
 	int i=0;
 	for (int i = 0; i < NUM_OF_DIO; i++) {
-		DIO_Init_Channel(Pin_Configs[i].PORT ,Pin_Configs[i].DDR );
+		Dio_InitChannel(Pin_Configs[i].PORT ,Pin_Configs[i].DDR );
 	}
 }

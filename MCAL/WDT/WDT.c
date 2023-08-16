@@ -1,6 +1,6 @@
 #include <Std_Types.h>
 #include <WDT.h>
-#include <Atmega32_Reg.h>
+#include <atmega32_Reg.h>
 
 
 #define WDT_16_3_ms		0

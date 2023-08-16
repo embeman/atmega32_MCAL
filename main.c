@@ -2,10 +2,12 @@
 #include <Dio.h>
 #include <atmega32_Reg.h>
 
+#include <util/delay.h>
+
 int main(){
 
-    DIO_Init_Channel(PB0,OUTPUT);
-    _PORTB |=1 <<0;
-    while(1);
+    while(1){
+        
+    }
     return 0;
 }

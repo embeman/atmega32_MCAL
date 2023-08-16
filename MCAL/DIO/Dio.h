@@ -4,9 +4,10 @@
 #include <Dio_Types.h>
 #include <Std_Types.h>
 
-void DIO_Write_Channel(Pin_Channel pin ,Pin_Channel_State state);
-uint8 DIO_Read_Channel(Pin_Channel pin);
-void DIO_Init_Channel(Pin_Channel pin ,Pin_Channel_Direction dir);
+void Dio_InitChannel(Pin_Channel pin ,Pin_Channel_Direction dir);
+void Dio_WriteChannel(Pin_Channel pin ,Pin_Channel_State state);
+uint8 Dio_ReadChannel(Pin_Channel pin);
+uint8 Dio_FlipChannel(Pin_Channel pin);
 
 #endif
 

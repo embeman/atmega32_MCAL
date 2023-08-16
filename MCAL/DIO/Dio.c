@@ -2,7 +2,7 @@
 #include <Bit_Math.h>
 #include <atmega32_Reg.h>
 
-void DIO_Init_Channel(Pin_Channel pin ,Pin_Channel_Direction dir){
+void Dio_InitChannel(Pin_Channel pin ,Pin_Channel_Direction dir){
 	switch(pin/8){
 	case 0:
 		SET_BIT(_DDRA , pin%8);
@@ -19,7 +19,7 @@ void DIO_Init_Channel(Pin_Channel pin ,Pin_Channel_Direction dir){
 	}
 }
 
-void DIO_Write_Channel(Pin_Channel pin , Pin_Channel_State state){
+void Dio_WriteChannel(Pin_Channel pin , Pin_Channel_State state){
 	switch(pin/8){
 	case 0:
 		if(state){
@@ -52,7 +52,7 @@ void DIO_Write_Channel(Pin_Channel pin , Pin_Channel_State state){
 	}
 }
 
-uint8 DIO_Read_Channel(Pin_Channel pin){
+uint8 Dio_ReadChannel(Pin_Channel pin){
 	switch(pin/8){
 	case 0:
 		return GET_BIT(_PINA , pin%8);
@@ -70,3 +70,24 @@ uint8 DIO_Read_Channel(Pin_Channel pin){
 	return 0;
 }
 
+uint8 Dio_FlipChannel(Pin_Channel pin){
+	switch(pin/8){
+	case 0:
+		TOGGLE_BIT(_PORTA , pin%8);
+		return GET_BIT(_PINA , pin%8);
+		break;
+	case 1:
+		TOGGLE_BIT(_PORTB , pin%8);
+		return GET_BIT(_PINB , pin%8);
+		break;
+	case 2:
+		TOGGLE_BIT(_PORTC , pin%8);
+		return GET_BIT(_PINC , pin%8);
+		break;
+	default:
+		TOGGLE_BIT(_PORTD , pin%8);
+		return GET_BIT(_PIND , pin%8);
+		break;
+	}
+	return 0;
+}
