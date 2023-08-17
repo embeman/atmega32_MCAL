@@ -2,9 +2,9 @@
 #define BIT_MATH_H_
 
 
-#define SET_BIT(PORT , x)		PORT |= (1<<x)
-#define CLEAR_BIT(PORT , x)		PORT &=~(1<<x)
-#define TOGGLE_BIT(PORT , x)	PORT ^= (1<<x)
+#define SET_BIT(PORT , x)		PORT |= (1<<(x))
+#define CLEAR_BIT(PORT , x)		PORT &=~(1<<(x))
+#define TOGGLE_BIT(PORT , x)	PORT ^= (1<<(x))
 
 #define SET_HIGH_NIPPLE(PORT , n)		PORT |= 0xf0
 #define CLEAR_HIGH_NIPPLE(PORT , n)		PORT&= 0x0f

@@ -2,9 +2,9 @@
 #define MCAL_TIMER_TIMER_CFG_H_
 
 //#define USE_TIMER0 0
-#define USE_TIMER0 1
+#define USE_TIMER0 0
 #define USE_TIMER1 1
-#define USE_TIMER2 1
+#define USE_TIMER2 0
 
 /*/////////////////////////////////////////////////////////////////////////////////////////////////////*/
 /*										utils													 */
@@ -91,7 +91,7 @@
 	#define TIMER1_PRESCALER_EXTERNAL_FALING	6
 	#define TIMER1_PRESCALER_EXTERNAL_RISING	7
 	// Enable Interrupt
-	#define TIMER1_OVF_INTERRUPT	1
+	#define TIMER1_OVF_INTERRUPT	0
 	#define TIMER1_OCRA_INTERRUPT 	0
 	#define TIMER1_OCRB_INTERRUPT 	0
 	#define TIMER1_ICU_INTERRUPT 	0
@@ -101,7 +101,7 @@
 	#define COMP1_NONINVERTED	2
 	#define COMP1_INVERTED		3
 
-	#define TIMER1_COMPA_MODE	COMP1_INVERTED
+	#define TIMER1_COMPA_MODE	COMP1_NONINVERTED
 	#define TIMER1_COMPB_MODE	COMP1_NORMAL
 
 	// Timer 1 Mode Select

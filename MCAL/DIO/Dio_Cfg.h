@@ -5,6 +5,7 @@
 
 typedef struct{
 	Pin_Channel PORT;
+	Pin_Group GROUP;
 	Pin_Channel_Direction DDR;
 }Pin_Config_t;
 
