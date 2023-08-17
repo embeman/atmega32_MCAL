@@ -1,6 +1,6 @@
 # Set project directory one level above of Makefile directory. $(CURDIR) is a GNU make variable containing the path to the current working directory
 PROJ_DIR := $(realpath $(CURDIR))
-PROJ_NAME = smartHome
+PROJ_NAME = smartHome_slave
 
 PROJ_SRC =  $(addprefix APP/,$(addsuffix  .c,$(PROJ_NAME)))
 PROJ_OBJ = $(patsubst %.c,%.o,$(PROJ_SRC))
@@ -25,13 +25,14 @@ DIRS =		MCAL/DIO 		\
 			MCAL/TWI 		\
 			MCAL/UART 		\
 			HAL/LCD			\
-			HAL/Keypad
+			HAL/Keypad		\
+			HAL/SRV
 
 SOURCES := $(foreach i , $(DIRS) , $(wildcard $(i)/*.c))
 OBJECTS := $(foreach i, $(SOURCES), $(patsubst %.c,%.o,$(i)))
 MKDIR := $(foreach i , $(DIRS) , $(addprefix $(BUILDDIR)/, $(i)))
 
-IPATH = utils MCAL/EEPROM MCAL/ADC MCAL/DIO MCAL/EXTI MCAL/GI MCAL/SPI MCAL/TIMER MCAL/TWI MCAL/UART MCAL/WDT HAL/LCD HAL/Keypad 
+IPATH = utils MCAL/EEPROM MCAL/ADC MCAL/DIO MCAL/EXTI MCAL/GI MCAL/SPI MCAL/TIMER MCAL/TWI MCAL/UART MCAL/WDT HAL/LCD HAL/Keypad HAL/SRV 
 
 INCLUDE = $(foreach dir, $(IPATH), $(addprefix -I, $(dir)))
 

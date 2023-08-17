@@ -22,59 +22,57 @@ void Lcd_Init(){
 
 void Lcd_SendData(uint8 data){
 	// sending upper nipple
-	Dio_WriteChannel(D4 , (data& 1<<4)>>4);
-	Dio_WriteChannel(D5 , (data& 1<<5)>>5);
-	Dio_WriteChannel(D6 , (data& 1<<6)>>6);
-	Dio_WriteChannel(D7 , (data& 1<<7)>>7);
+	Dio_WriteChannel(D4_GROUP , D4 , (data& 1<<4)>>4);
+	Dio_WriteChannel(D5_GROUP , D5 , (data& 1<<5)>>5);
+	Dio_WriteChannel(D6_GROUP , D6 , (data& 1<<6)>>6);
+	Dio_WriteChannel(D7_GROUP , D7 , (data& 1<<7)>>7);
 
 	// RS =0
-	Dio_WriteChannel(RS , HIGH);
+	Dio_WriteChannel(RS_GROUP , RS , HIGH);
 	// enable pulse
-	Dio_WriteChannel(EN , HIGH);
+	Dio_WriteChannel(EN_GROUP , EN , HIGH);
 	_delay_us(1);
-	Dio_WriteChannel(EN , LOW);
+	Dio_WriteChannel(EN_GROUP , EN , LOW);
 	_delay_us(200);
 
 	// sending lower nipple
-	Dio_WriteChannel(D4 , (data & 1<<0)>>0);
-	Dio_WriteChannel(D5 , (data & 1<<1)>>1);
-	Dio_WriteChannel(D6 , (data & 1<<2)>>2);
-	Dio_WriteChannel(D7 , (data & 1<<3)>>3);
+	Dio_WriteChannel(D4_GROUP , D4 , (data & 1<<0)>>0);
+	Dio_WriteChannel(D5_GROUP , D5 , (data & 1<<1)>>1);
+	Dio_WriteChannel(D6_GROUP , D6 , (data & 1<<2)>>2);
+	Dio_WriteChannel(D7_GROUP , D7 , (data & 1<<3)>>3);
 
 	// enable pulse
-	Dio_WriteChannel(EN , HIGH);
+	Dio_WriteChannel(EN_GROUP , EN , HIGH);
 	_delay_us(1);
-	Dio_WriteChannel(EN , LOW);
+	Dio_WriteChannel(EN_GROUP , EN , LOW);
 	_delay_ms(2);
-
 }
-
 
 void Lcd_SendCommand(uint8 command){
 	// sending upper nipple
-	Dio_WriteChannel(D4 , (command & 1<<4)>>4);
-	Dio_WriteChannel(D5 , (command & 1<<5)>>5);
-	Dio_WriteChannel(D6 , (command & 1<<6)>>6);
-	Dio_WriteChannel(D7 , (command & 1<<7)>>7);
+	Dio_WriteChannel(D4_GROUP , D4 , (command & 1<<4)>>4);
+	Dio_WriteChannel(D5_GROUP , D5 , (command & 1<<5)>>5);
+	Dio_WriteChannel(D6_GROUP , D6 , (command & 1<<6)>>6);
+	Dio_WriteChannel(D7_GROUP , D7 , (command & 1<<7)>>7);
 
 	// RS =0
-	Dio_WriteChannel(RS , LOW);
+	Dio_WriteChannel(RS_GROUP , RS , LOW);
 	// enable pulse
-	Dio_WriteChannel(EN , HIGH);
+	Dio_WriteChannel(EN_GROUP , EN , HIGH);
 	_delay_us(1);
-	Dio_WriteChannel(EN , LOW);
+	Dio_WriteChannel(EN_GROUP ,EN , LOW);
 	_delay_us(200);
 
 	// sending lower nipple
-	Dio_WriteChannel(D4 , (command & 1<<0)>>0);
-	Dio_WriteChannel(D5 , (command & 1<<1)>>1);
-	Dio_WriteChannel(D6 , (command & 1<<2)>>2);
-	Dio_WriteChannel(D7 , (command & 1<<3)>>3);
+	Dio_WriteChannel(D4_GROUP , D4 , (command & 1<<0)>>0);
+	Dio_WriteChannel(D5_GROUP , D5 , (command & 1<<1)>>1);
+	Dio_WriteChannel(D6_GROUP , D6 , (command & 1<<2)>>2);
+	Dio_WriteChannel(D7_GROUP , D7 , (command & 1<<3)>>3);
 
 	// enable pulse
-	Dio_WriteChannel(EN , HIGH);
+	Dio_WriteChannel(EN_GROUP , EN , HIGH);
 	_delay_us(1);
-	Dio_WriteChannel(EN , LOW);
+	Dio_WriteChannel(EN_GROUP , EN , LOW);
 	_delay_ms(2);
 }
 

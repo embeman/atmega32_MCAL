@@ -8,10 +8,16 @@
 #define D6 PB2
 #define D7 PB4
 
-#define Data_Port PORTB
+#define D4_GROUP GROUPB
+#define D5_GROUP GROUPB
+#define D6_GROUP GROUPB
+#define D7_GROUP GROUPB
 
 #define RS PA3
 #define EN PA2
+
+#define RS_GROUP GROUPA
+#define EN_GROUP GROUPA
 
 #define Control_Port PORTA
 

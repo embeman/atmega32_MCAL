@@ -11,6 +11,16 @@
 #define C3 PD5
 #define C4 PD3
 
+#define R1_GROUP GROUPC
+#define R2_GROUP GROUPC
+#define R3_GROUP GROUPC
+#define R4_GROUP GROUPC
+
+#define C1_GROUP GROUPD
+#define C2_GROUP GROUPD
+#define C3_GROUP GROUPD
+#define C4_GROUP GROUPD
+
 typedef enum {
 	SW_1=0	,SW_2	,SW_3,	SW_4,
 	SW_5	,SW_6	,SW_7,	SW_8,
