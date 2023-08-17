@@ -14,18 +14,18 @@ TARGET = $(addsuffix .elf, $(PROJ_NAME))
 HEX_FILE = $(patsubst %.elf,%.hex,$(TARGET))
 BUILDDIR := Build
 
-DIRS =		MCAL/DIO 		
-# MCAL/WDT		\
-# MCAL/ADC 		\
-# MCAL/EEPROM		\
-# MCAL/EXTI 		\
-# MCAL/GI 		\
-# MCAL/SPI		\
-# MCAL/TIMER	 	\
-# MCAL/TWI 		\
-# MCAL/UART 		\
-# HAL/LCD			\
-# HAL/Keypad
+DIRS =		MCAL/DIO 		\
+			MCAL/WDT		\
+			MCAL/ADC 		\
+			MCAL/EEPROM		\
+			MCAL/EXTI 		\
+			MCAL/GI 		\
+			MCAL/SPI		\
+			MCAL/TIMER	 	\
+			MCAL/TWI 		\
+			MCAL/UART 		\
+			HAL/LCD			\
+			HAL/Keypad
 
 SOURCES := $(foreach i , $(DIRS) , $(wildcard $(i)/*.c))
 OBJECTS := $(foreach i, $(SOURCES), $(patsubst %.c,%.o,$(i)))
