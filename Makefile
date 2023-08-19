@@ -1,6 +1,6 @@
 # Set project directory one level above of Makefile directory. $(CURDIR) is a GNU make variable containing the path to the current working directory
 PROJ_DIR := $(realpath $(CURDIR))
-PROJ_NAME = smartHome_slave
+PROJ_NAME = myApp
 
 PROJ_SRC =  $(addprefix APP/,$(addsuffix  .c,$(PROJ_NAME)))
 PROJ_OBJ = $(patsubst %.c,%.o,$(PROJ_SRC))
@@ -8,6 +8,7 @@ PROJ_OBJ = $(patsubst %.c,%.o,$(PROJ_SRC))
 CC = avr-gcc
 LD = avr-ld
 OBJCOPY = avr-objcopy
+OBJSIZE = avr-size
 
 # Name of the final executable
 TARGET = $(addsuffix .elf, $(PROJ_NAME))
@@ -26,13 +27,31 @@ DIRS =		MCAL/DIO 		\
 			MCAL/UART 		\
 			HAL/LCD			\
 			HAL/Keypad		\
-			HAL/SRV
+			HAL/SRV			\
+			RTOS/portable_gcc_atmega32 			\
+			RTOS/portable_gcc_atmega32/mem_mang	\
+			RTOS/source
 
 SOURCES := $(foreach i , $(DIRS) , $(wildcard $(i)/*.c))
 OBJECTS := $(foreach i, $(SOURCES), $(patsubst %.c,%.o,$(i)))
 MKDIR := $(foreach i , $(DIRS) , $(addprefix $(BUILDDIR)/, $(i)))
 
-IPATH = utils MCAL/EEPROM MCAL/ADC MCAL/DIO MCAL/EXTI MCAL/GI MCAL/SPI MCAL/TIMER MCAL/TWI MCAL/UART MCAL/WDT HAL/LCD HAL/Keypad HAL/SRV 
+IPATH = 	utils			\
+			MCAL/EEPROM		\
+			MCAL/ADC 		\
+			MCAL/DIO		\
+			MCAL/EXTI 		\
+			MCAL/GI 		\
+			MCAL/SPI		\
+			MCAL/TIMER		\
+			MCAL/TWI 		\
+			MCAL/UART 		\
+			MCAL/WDT 		\
+			HAL/LCD 		\
+			HAL/Keypad 		\
+			HAL/SRV 		\
+			RTOS/portable_gcc_atmega32		\
+			RTOS/include	
 
 INCLUDE = $(foreach dir, $(IPATH), $(addprefix -I, $(dir)))
 
@@ -46,7 +65,7 @@ CFLAGS := -mmcu=$(MCU) -Wall -O0 -DF_CPU=$(F_CPU) $(INCLUDE) $(NO_WARNING)
 LDFLAGS := $(CFLAGS)
 
 all:$(TARGET) $(HEX_FILE)
-
+	$(OBJSIZE) -C --mcu=$(MCU) $(TARGET)
 
 $(TARGET): $(PROJ_OBJ) $(OBJECTS)
 	@echo "Linking $@"
