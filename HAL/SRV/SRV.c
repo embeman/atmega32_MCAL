@@ -5,7 +5,7 @@
 
 void SRV_Init(void)
 {
-	Timer_init();
+	//Timer_init();
 }
 
 void SRV_setAngle(uint8 angle)
@@ -16,6 +16,6 @@ void SRV_setAngle(uint8 angle)
 	{
 		duty=Max_duty;
 	}
-	Timer_SetOCR1A(duty);
+	//Timer_SetOCR1A(duty);
 }
 

@@ -1,7 +1,6 @@
 #ifndef BIT_MATH_H_
 #define BIT_MATH_H_
 
-
 #define SET_BIT(PORT , x)		PORT |= (1<<(x))
 #define CLEAR_BIT(PORT , x)		PORT &=~(1<<(x))
 #define TOGGLE_BIT(PORT , x)	PORT ^= (1<<(x))

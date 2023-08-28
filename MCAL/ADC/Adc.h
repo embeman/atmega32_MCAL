@@ -4,6 +4,6 @@
 #include <Std_Types.h>
 
 void Adc_Init();
-uint8 Adc_Read();
+uint16 Adc_Read();
 
 #endif /* MCAL_ADC_ADC_H_ */

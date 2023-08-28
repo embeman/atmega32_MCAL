@@ -2,6 +2,17 @@
 #include <Dio.h>
 
 void Keypad_Init(){
+	Dio_InitChannel(C1_GROUP , C1 , INPUT_PULLUP);
+	Dio_InitChannel(C2_GROUP , C2 , INPUT_PULLUP);
+	Dio_InitChannel(C3_GROUP , C3 , INPUT_PULLUP);
+	Dio_InitChannel(C4_GROUP , C4 , INPUT_PULLUP);
+
+	Dio_InitChannel(R1_GROUP , R1 , OUTPUT);
+	Dio_InitChannel(R2_GROUP , R2 , OUTPUT);
+	Dio_InitChannel(R3_GROUP , R3 , OUTPUT);
+	Dio_InitChannel(R4_GROUP , R4 , OUTPUT);
+
+
 	Dio_WriteChannel(R1_GROUP , R1, HIGH);
 	Dio_WriteChannel(R2_GROUP , R2, HIGH);
 	Dio_WriteChannel(R3_GROUP , R3, HIGH);

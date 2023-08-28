@@ -3,7 +3,6 @@
 
 #include <Dio.h>
 #include <Dio_Cfg.h>
-#include <Lcd_Cfg.h>
 
 void Lcd_Init();
 void Lcd_SendData(uint8);

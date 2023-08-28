@@ -1,9 +1,8 @@
 #ifndef MCAL_TIMER_TIMER_CFG_H_
 #define MCAL_TIMER_TIMER_CFG_H_
 
-//#define USE_TIMER0 0
 #define USE_TIMER0 0
-#define USE_TIMER1 1
+#define USE_TIMER1 0
 #define USE_TIMER2 0
 
 /*/////////////////////////////////////////////////////////////////////////////////////////////////////*/
@@ -12,7 +11,6 @@
 
 #define Enable 	1
 #define Disable 0
-
 
 /*/////////////////////////////////////////////////////////////////////////////////////////////////////*/
 /*										Timer 0													 */

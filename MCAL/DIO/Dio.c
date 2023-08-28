@@ -6,16 +6,46 @@
 void Dio_InitChannel(Pin_Group group,Pin_Channel pin ,Pin_Channel_Direction dir){
 	switch(group){
 	case GROUPA:
-		SET_BIT(_DDRA , pin);
+		if (dir == OUTPUT){
+			_DDRA |= 1<<pin;
+		}else if(dir == INPUT){
+			_DDRA &=~(1<<pin);
+		}else if(INPUT_PULLUP){
+			_DDRA &=~(1<<pin);
+			_PORTA |= 1<<pin;
+		}
 		break;
 	case GROUPB:
-		SET_BIT(_DDRB , pin);
+		if (dir == OUTPUT){
+			_DDRB |= 1<<pin;
+		}else if(dir == INPUT){
+			_DDRB &=~(1<<pin);
+		}else if(INPUT_PULLUP){
+			_DDRB &=~(1<<pin);
+			_PORTB |= 1<<pin;
+		}
 		break;
 	case GROUPC:
-		SET_BIT(_DDRC , pin);
+		if (dir == OUTPUT){
+			_DDRC |= 1<<pin;
+		}else if(dir == INPUT){
+			_DDRC &=~(1<<pin);
+		}else if(INPUT_PULLUP){
+			_DDRC &=~(1<<pin);
+			_PORTC |= 1<<pin;
+		}
+		break;
+	case GROUPD:
+		if (dir == OUTPUT){
+			_DDRD |= 1<<pin;
+		}else if(dir == INPUT){
+			_DDRD &=~(1<<pin);
+		}else if(INPUT_PULLUP){
+			_DDRD &=~(1<<pin);
+			_PORTD |= 1<<pin;
+		}
 		break;
 	default:
-		SET_BIT(_DDRD , pin);
 		break;
 	}
 	
@@ -25,31 +55,33 @@ void Dio_WriteChannel(Pin_Group group,Pin_Channel pin , Pin_Channel_State state)
 	switch(group){
 	case GROUPA:
 		if(state){
-			SET_BIT(_PORTA , pin);
+			_PORTA |= 1<<pin;
 		}else{
-			CLEAR_BIT(_PORTA, pin);
+			_PORTA &=~(1<<pin);
 		}
 		break;
 	case GROUPB:
 		if(state){
-			SET_BIT(_PORTB , pin);
+			_PORTB |= 1<<pin;
 		}else{
-			CLEAR_BIT(_PORTB, pin);
+			_PORTB &=~(1<<pin);
 		}
 		break;
 	case GROUPC:
 		if(state){
-			SET_BIT(_PORTC , pin);
+			_PORTC |= 1<<pin;
 		}else{
-			CLEAR_BIT(_PORTC , pin);
+			_PORTC &=~(1<<pin);
+		}
+		break;
+	case GROUPD:
+		if(state){
+			_PORTD |= 1<<pin;
+		}else{
+			_PORTD &=~(1<<pin);
 		}
 		break;
 	default:
-		if(state){
-			SET_BIT(_PORTD , pin);
-		}else{
-			CLEAR_BIT(_PORTD , pin);
-		}
 		break;
 	}
 }
@@ -57,16 +89,18 @@ void Dio_WriteChannel(Pin_Group group,Pin_Channel pin , Pin_Channel_State state)
 uint8 Dio_ReadChannel(Pin_Group group,Pin_Channel pin){
 	switch(group){
 	case GROUPA:
-		return GET_BIT(_PINA , pin);
+		return (_PINA >> pin) & 0x01;
 		break;
 	case GROUPB:
-		return GET_BIT(_PINB , pin);
+		return (_PINB >> pin) & 0x01;
 		break;
 	case GROUPC:
-		return GET_BIT(_PINC , pin);
+		return (_PINC >> pin) & 0x01;
+		break;
+	case GROUPD:
+		return (_PIND >> pin) & 0x01;
 		break;
 	default:
-		return GET_BIT(_PIND , pin);
 		break;
 	}
 	return 0;
@@ -75,20 +109,22 @@ uint8 Dio_ReadChannel(Pin_Group group,Pin_Channel pin){
 uint8 Dio_FlipChannel(Pin_Group group,Pin_Channel pin){
 	switch(group){
 	case GROUPA:
-		TOGGLE_BIT(_PORTA , pin);
-		return GET_BIT(_PINA , pin);
+		_PORTA ^= 1<<pin;
+		return Dio_ReadChannel(group,pin);
 		break;
 	case GROUPB:
-		_PORTB ^= 1<<(pin%8);
-		return GET_BIT(_PINB , pin);
+		_PORTB ^= 1<<pin;
+		return Dio_ReadChannel(group,pin);
 		break;
 	case GROUPC:
-		TOGGLE_BIT(_PORTC , pin);
-		return GET_BIT(_PINC , pin);
+		_PORTC ^= 1<<pin;
+		return Dio_ReadChannel(group,pin);
+		break;
+	case GROUPD:
+		_PORTD ^= 1<<pin;
+		return Dio_ReadChannel(group,pin);
 		break;
 	default:
-		TOGGLE_BIT(_PORTD , pin);
-		return GET_BIT(_PIND , pin);
 		break;
 	}
 	return 0;

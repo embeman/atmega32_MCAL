@@ -1,6 +1,6 @@
 # Set project directory one level above of Makefile directory. $(CURDIR) is a GNU make variable containing the path to the current working directory
 PROJ_DIR := $(realpath $(CURDIR))
-PROJ_NAME = myApp
+PROJ_NAME = smartHome
 
 PROJ_SRC =  $(addprefix APP/,$(addsuffix  .c,$(PROJ_NAME)))
 PROJ_OBJ = $(patsubst %.c,%.o,$(PROJ_SRC))
@@ -56,12 +56,12 @@ IPATH = 	utils			\
 INCLUDE = $(foreach dir, $(IPATH), $(addprefix -I, $(dir)))
 
 MCU = atmega32
-F_CPU = 8000000UL
+F_CPU = 16000000UL
 
 WARNING = -Wunused-function -Wswitch -Wunused-variable -Wreturn-type
 NO_WARNING = -Wno-unused-function -Wno-switch -Wno-unused-variable -Wno-return-type
 
-CFLAGS := -mmcu=$(MCU) -Wall -O0 -DF_CPU=$(F_CPU) $(INCLUDE) $(NO_WARNING)
+CFLAGS := -mmcu=$(MCU) -Wall -Os -DF_CPU=$(F_CPU) $(INCLUDE) $(NO_WARNING)
 LDFLAGS := $(CFLAGS)
 
 all:$(TARGET) $(HEX_FILE)
@@ -69,22 +69,22 @@ all:$(TARGET) $(HEX_FILE)
 
 $(TARGET): $(PROJ_OBJ) $(OBJECTS)
 	@echo "Linking $@"
-	$(CC) $^ -o $@ $(LDFLAGS)
+	@$(CC) $^ -o $@ $(LDFLAGS)
 
 $(PROJ_OBJ): $(PROJ_SRC)
 	@echo "Building $<"
-	$(CC) -c $< -o $@ $(CFLAGS)
+	@$(CC) -c $< -o $@ $(CFLAGS)
 
 $(HEX_FILE): $(TARGET)
 	@echo "Creating Hex File $(HEX_FILE)"
-	$(OBJCOPY) -j .text -j .data -O ihex $(TARGET) $@
+	@$(OBJCOPY) -j .text -j .data -O ihex $(TARGET) $@
 
 ########################################################################
 # using static pattern rule to compile for now
 # TODO : using generate rule method
 $(OBJECTS):%.o:%.c
 	@echo "Building $<"
-	$(CC) -c $< -o $@ $(CFLAGS)
+	@$(CC) -c $< -o $@ $(CFLAGS)
 ########################################################################
 
 flash: $(HEX_FILE)
